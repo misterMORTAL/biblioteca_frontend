@@ -1,0 +1,80 @@
+<div class="pos-f-t">
+  <nav class="navbar p-2" style="background-color:#b8b3b3;">
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+      data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false"
+      aria-label="Toggle navigation" style="background-color: rgba(255, 255, 255, 0.673);">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <a style="color: rgb(0, 0, 0);">
+      <img src="../../../assets/img/Yavirac.png" alt="User Image" style="width: 90px; height: 50px; float: left; margin-right: 2000px;">
+    </a>
+    
+    
+    <div class="d-flex justify-content-center align-items-center m-3">
+     
+      <a class="nav-link mx-3" routerLink="/dashboard" style="color: rgb(0, 0, 0);"><i class="fas fa-home fa-lg fa-2x"
+          style="color:rgba(0, 0, 0, 0.673);"></i>
+        Inicio</a>
+        
+      <a class="nav-link mx-3" style="color: rgb(0, 0, 0);"><i class="fas fa-user-circle fa-2x"
+          style="color: rgba(0, 0, 0, 0.673);" ></i>
+      </a>
+      <div *ngIf="userName && userLastName">
+        <p>{{ userName }} {{ userLastName }}</p>
+      </div>
+      
+    </div>
+  </nav>
+
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="navbarToggleExternalContent" style="width: 400px; background-color:#b8b3b3;">
+    <div class="offcanvas-header" style="background-color:#b8b3b3;">
+      <h5 class="offcanvas-title text-black"><b>Menu de la biblioteca</b></h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="" style="background-color:#b8b3b3;">
+      <div  style="margin-top: 30px; margin-bottom: 50px;">
+        <h5><i class="fas fa-list fa-lg fa-2x" style="background-color:#b8b3b3;"> Secciones</i></h5>
+      </div>
+      <div style="color: rgba(0, 0, 0, 0.673);">
+        <hr style="height: 8px; border: none; background-color: currentColor;">
+      </div>
+      <label class="btn btn-secondary d-flex justify-content-start align-items-start"
+        style="margin-top: 50px; background: rgba(137, 43, 226, 0); border: none;">
+        <a routerLink="/register" style="text-decoration: none; color: rgb(0, 0, 0);"><i class="fas fa-user-circle fa-lg fa-2x"
+            style="color: #000000;"> Gestion de Usuarios</i></a>
+      </label>
+
+      <label class="btn btn-secondary d-flex justify-content-start align-items-start"
+        style="margin-top: 50px; background: rgba(137, 43, 226, 0); border: none;">
+        <a routerLink="/book" style="text-decoration: none; color: rgb(0, 0, 0);"><i class="fas fa-book fa-lg fa-2x"
+            style="color: #000000;"> Gestion de Libros</i></a>
+      </label>
+      <label class="btn btn-secondary d-flex justify-content-start align-items-start"
+        style="margin-top: 50px; background: rgba(137, 43, 226, 0); border: none;">
+        <a routerLink="/category" style="text-decoration: none; color: rgb(0, 0, 0);"><i class="fas fa-tags fa-lg fa-2x"
+            style="color: #000000;"> Gestión Categorías</i></a>
+      </label>
+      <label class="btn btn-secondary d-flex justify-content-start align-items-start"
+        style="margin-top: 50px; background: rgba(137, 43, 226, 0); border: none;">
+        <a routerLink="/rental" style="text-decoration: none; color: rgb(0, 0, 0);"><i class="fas fa-user-tie fa-2x"
+            style="color: #000000;"> Gestión Alquileres</i></a>
+      </label>
+      <label class="btn btn-secondary d-flex justify-content-start align-items-start"
+        style="margin-top: 50px; background: rgba(137, 43, 226, 0); border: none;">
+        <a routerLink="/editorial" style="text-decoration: none; color: rgb(0, 0, 0);"><i class="fas fa-newspaper fa-2x"
+            style="color: #000000;"> Gestión Editoriales</i></a>
+      </label>
+      <label class="btn btn-secondary d-flex justify-content-start align-items-start"
+        style="margin-top: 50px; background: rgba(137, 43, 226, 0); border: none;">
+        <a routerLink="/author" style="text-decoration: none; color: rgb(0, 0, 0);"><i class="fas fa-users fa-2x"
+            style="color: #000000;"> Gestión Autores</i></a>
+      </label>
+      <label class="btn btn-secondary d-flex justify-content-start align-items-start"
+        style="margin-top: 50px; background: rgba(137, 43, 226, 0); border: none;">
+        <a routerLink="" style="text-decoration: none; color: rgb(0, 0, 0);"><i class="fas fa-sign-out-alt fa-2x"
+            style="color: #000000;">Cerrar Sesión</i></a>
+      </label>
+    </div>
+  </div>
+</div>

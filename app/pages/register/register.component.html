@@ -1,0 +1,221 @@
+<div class="container-fluid">
+    <app-sidebar></app-sidebar>
+
+    <div class="row">
+        <div class="p-5 d-flex justify-content-between align-items-center">
+            <h1><b>Registrar usuario</b></h1>
+            <a href="##" style="text-decoration: none; color: white;"><i class="fas fa-user-circle fa-7x"
+                    style="color: #563d7c; margin-right: 30px;"></i></a>
+            
+                        
+                       
+                    
+
+
+        </div>
+        <div class="col-md-12">
+            <hr>
+        </div>
+        <div class="col-md-12">
+            <div class="d-flex justify-content-end" style="margin-top: 60px; margin-bottom: 20px; margin-right: 30px;">
+                <span class="p-input-icon-left" style="margin-right: 40px;">
+                    <i class="fas fa-search fa-lg"></i>
+                    <input type="text" pInputText [(ngModel)]="filtro" (input)="traer()" placeholder="Filtro"/>
+                </span>
+                <p-button label="Agregar" (click)="showDialog()" [raised]="true" severity="Agregar"><i
+                        class="fas fa-plus fa-1x"
+                        style="color: white; margin-left: 10px; cursor: pointer; margin-right: 15px;"></i></p-button>
+            </div>
+            <div class="modal-overlay" *ngIf="displayDialog"></div>
+
+     
+            <p-dialog header="Registrar Usuaio" [(visible)]="displayDialog" [modal]="true" [responsive]="true">
+                <!-- Contenido del diálogo -->
+                <form style="width: 500px;" (submit)="agregarDato()">
+
+                    <div class="form-group">
+                        <label for="title" class="" style="font-size: 15px;"><b>Nombre:</b></label>
+                        <input type="text" [(ngModel)]="name" name="name" class="form-control" id="title" placeholder="Ingrese el nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="author" class=""
+                            style="font-size: 15px; font-family: 'Monospace', monospace;"><b>Apellido:</b></label>
+                        <input type="text" [(ngModel)]="lastname" name="lastname" class="form-control" id="author"
+                            placeholder="Ingrese el apellido"
+                            style="background-color: rgba(0, 0, 0, 0.212); border-color: black; background: white; font-family: 'Monospace', monospace;">
+                    </div>
+                    <div class="form-group">
+                        <label for="category" class=""
+                            style="font-size: 15px; font-family: 'Monospace', monospace;"><b>Direcció:</b></label>
+                        <input type="text" [(ngModel)]="address" name="address"  class="form-control" id="category" placeholder="Ingrese la dirección"
+                            style="background-color: rgba(0, 0, 0, 0.212); border-color: black; background: white; font-family: 'Monospace', monospace;">
+                    </div>
+                    <div class="form-group">
+                        <label for="publisher" class=""
+                            style="font-size: 15px; font-family: 'Monospace', monospace;"><b>Email:</b></label>
+                        <input type="text" [(ngModel)]="email"  name="email" class="form-control" id="publisher" placeholder="Ingrese el correo electrónico"
+                            style="background-color: rgba(0, 0, 0, 0.212); border-color: black; background: white; font-family: 'Monospace', monospace;">
+                    </div>
+                    <div class="form-group">
+                        <label for="language" class=""
+                            style="font-size: 15px; font-family: 'Monospace', monospace;"><b>Contraseña:</b></label>
+                        <input type="password" [(ngModel)]="password"  name="password" class="form-control" id="language" placeholder="Ingrese la contraseña"
+                            style="background-color: rgba(0, 0, 0, 0.212); border-color: black; background: white; font-family: 'Monospace', monospace;">
+                    </div>
+
+
+                    <div class="d-flex justify-content-between align-items-center mt-4">
+                        <div style="margin-left: 90px;">
+                            <button type="submit" class="btn btn-success" (click)="showCorreo()"
+                            style="border-radius: 10px; padding-right: 20px; padding-left: 20px; padding-top: 10px; padding-bottom: 10px; font-family: 
+                            'Monospace', monospace; font-size: 20px; color: white;"><b>Confirmar</b>
+                        </button>
+                        </div>
+
+                        
+                        <form [formGroup]="datos">
+                            <div class="div p-2" >
+                                <p-dialog header="Enviar correo" [(visible)]="displayCorreo" [modal]="true" [responsive]="true">
+                                    <div class="form-group">
+                                        <input type="email" placeholder="Correo" class="form-control" formControlName="correo"> <br>
+                                        <input type="text" placeholder="asunto" class="form-control" formControlName="asunto"><br>
+                                        <textarea class="form-control" placeholder="mensaje" id="" cols="30" rows="5" formControlName="mensaje"></textarea>
+                                        <div class="text-center p-2" >
+                                            <button class="btn btn-outline-danger" (click)="enviocorreo()">Enviar</button>
+                                        </div>
+                                       
+                                    </div>
+                                </p-dialog>
+    
+                            </div>
+                        </form>
+                       
+                        
+
+                        
+
+
+
+
+                        <div style="margin-right: 90px;">
+                            <button type="button" (click)="hideDialog()" class="btn btn-danger"
+                                style="border-radius: 10px; padding-right: 25px; padding-left: 25px; padding-top: 10px; padding-bottom: 10px; font-family: 'Monospace', monospace; font-size: 20px; color: white;"><b>Cancelar</b></button>
+                        </div>
+                    </div>
+
+                </form>
+
+
+            </p-dialog>
+
+        </div>
+        <!-- Formulario Editar -->
+        <div class="modal-overlay" *ngIf="exDialog"></div>
+
+        <p-dialog header="Editar usuario" [(visible)]="exDialog" [modal]="true" [responsive]="true">
+            <!-- Contenido del diálogo -->
+            <form style="width: 500px;" *ngIf="modoEdicion" (submit)="guardarEdicion()">
+
+                <div class="form-group">
+                    <label for="title" class="" style="font-size: 15px;"><b>Nombre:</b></label>
+                    <input type="text" [(ngModel)]="datoEditado.name" name="nombreEditado" class="form-control" id="title"
+                        placeholder="Ingrese el nombre" style="background-color: rgba(0, 0, 0, 0.212); border-color: black; background: white; font-family: 'Monospace', monospace;">
+                </div>
+                <div class="form-group">
+                    <label for="releaseDate" class="" style="font-size: 15px; font-family: 'Monospace', monospace;"><b>Apellido:</b></label>
+                    <input type="text" [(ngModel)]="datoEditado.lastname" name="apellidoLanzamiento" class="form-control" id="releaseDate"
+                        placeholder="Ingrese el apellido" style="background-color: rgba(0, 0, 0, 0.212); border-color: black; background: white; font-family: 'Monospace', monospace;">
+                </div>
+                <!-- Agregar las demás propiedades correspondientes -->
+                <div class="form-group">
+                    <label for="author" class="" style="font-size: 15px; font-family: 'Monospace', monospace;"><b>Dirección:</b></label>
+                    <input type="text" [(ngModel)]="datoEditado.address" name="autor" class="form-control" id="author"
+                        placeholder="Ingrese la dirección" style="background-color: rgba(0, 0, 0, 0.212); border-color: black; background: white; font-family: 'Monospace', monospace;">
+                </div>
+                <div class="form-group">
+                    <label for="releaseDate" class=""
+                        style="font-size: 15px; font-family: 'Monospace', monospace;"><b>Email:</b></label>
+                    <input type="text" [(ngModel)]="datoEditado.email" name="email" class="form-control" id="releaseDate"
+                        placeholder="Ingrese el correo electronico"
+                        style="background-color: rgba(0, 0, 0, 0.212); border-color: black; background: white; font-family: 'Monospace', monospace;">
+                </div>
+                <div class="form-group">
+                    <label for="author" class=""
+                        style="font-size: 15px; font-family: 'Monospace', monospace;"><b>Contraseña:</b></label>
+                    <input type="password" [(ngModel)]="datoEditado.password" name="password" class="form-control" id="author"
+                        placeholder="Ingrese la contraseña"
+                        style="background-color: rgba(0, 0, 0, 0.212); border-color: black; background: white; font-family: 'Monospace', monospace;">
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-4">
+                    <div style="margin-left: 90px;">
+                        <button type="submit"  class="btn btn-success"
+                            style="border-radius: 10px; padding-right: 20px; padding-left: 20px; padding-top: 10px; padding-bottom: 10px; font-family: 'Monospace', monospace; font-size: 20px; color: white;"><b>Actualizar</b>
+                        </button>
+                    </div>
+                    <div style="margin-right: 90px;">
+                        <button type="button" (click)="exitDialog()" class="btn btn-danger"
+                            style="border-radius: 10px; padding-right: 25px; padding-left: 25px; padding-top: 10px; padding-bottom: 10px; font-family: 'Monospace', monospace; font-size: 20px; color: white;"><b>Cancelar</b></button>
+                    </div>
+                </div>
+            </form>
+
+
+        </p-dialog>
+
+    </div>
+        <div class="card">
+            <p-table [value]="listar.slice(first, first + rows)" [tableStyle]="{ 'min-width': '50rem' }">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Nombre</th>
+                        
+                        <th>Apellido</th>
+                        <th>Dirección</th>
+                        <th>Email</th>
+                        <th class=" d-flex justify-content-center">Editar/Eliminar</th>
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-dato let-i="index">
+                    <tr>
+                        
+                        <!-- ... (otras columnas) -->
+                        <td class="d-flex justify-content-center"> 
+                            <i class="fas fa-pencil-alt fa-lg"
+                                style="color: blue; cursor: pointer; margin-right: 10px;" (click)="editarDato(i)"></i>
+                            <i class="fas fa-trash-alt fa-lg" style="color: red; cursor: pointer;"
+                                (click)="eliminar(dato)"></i>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-dato let-i="index">
+                    <tr>
+                        <td>{{ dato.name }}</td>
+                        <td>{{ dato.lastname }}</td>
+                        <td>{{ dato.address }}</td>
+                        <td>{{ dato.email }}</td>
+                        <td class=" d-flex justify-content-center"> 
+                            <i class="fas fa-pencil-alt fa-lg"
+                                style="color: blue; cursor: pointer; margin-right: 10px;" (click)="editarDato(dato)"></i>
+                            <i class="fas fa-trash-alt fa-lg" style="color: red; cursor: pointer;"
+                                (click)="eliminar(dato)"></i>
+                        </td>
+                    </tr>
+                </ng-template>
+
+                
+                
+            </p-table>
+            
+            <div class="card flex justify-content-center">
+                <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="listar.length"
+                    [rowsPerPageOptions]="[6]"></p-paginator>
+            </div>
+        </div>
+
+    </div>
+    
+
+    <div class="footer">
+        <app-footer></app-footer>
+    </div>

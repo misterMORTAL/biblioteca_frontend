@@ -1,0 +1,18 @@
+
+body {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Establece el alto mínimo del cuerpo al 100% de la altura de la ventana del navegador */
+    margin: 0; /* Elimina el margen predeterminado del cuerpo */
+}
+
+.container-fluid {
+    flex: 1; /* Hace que este contenedor ocupe el espacio disponible */
+    /* Otros estilos según sea necesario */
+}
+
+.footer {
+    flex-shrink: 0; /* Evita que el pie de página se encoja cuando el contenido es más alto que la pantalla */
+    /* Otros estilos según sea necesario */
+}

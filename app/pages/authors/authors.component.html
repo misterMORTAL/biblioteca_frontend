@@ -1,0 +1,121 @@
+
+<div class="container-fluid">
+    <app-sidebar></app-sidebar>
+
+    <div class="row">
+        <div class="p-5 d-flex justify-content-between align-items-center">
+            <h1><b>Authors</b></h1>
+            <a href="##" style="text-decoration: none; color: white;"><i class="fas fa-users fa-7x"
+                style="color: #563d7c; margin-right: 30px;"></i></a>
+        </div>
+        <div class="col-md-12">
+            <hr>
+        </div>
+        <div class="col-md-12">
+            <div class="d-flex justify-content-end" style="margin-top: 60px; margin-bottom: 20px; margin-right: 30px;">
+                <span class="p-input-icon-left" style="margin-right: 40px;">
+                    <i class="fas fa-search fa-lg"></i>
+                    <input type="text" pInputText [(ngModel)]="filtro" (input)="traer()" placeholder="Filtro"/>    
+                </span>
+                <p-button label="Agregar" (click)="showDialog()" [raised]="true" severity="Agregar"><i class="fas fa-plus fa-1x" style="color: white; margin-left: 10px; cursor: pointer; margin-right: 15px;"></i></p-button>
+            </div>
+            <div class="modal-overlay" *ngIf="displayDialog"></div>
+
+            <p-dialog header="Registrar Autor" [(visible)]="displayDialog" [modal]="true" [responsive]="true">
+                <!-- Contenido del diálogo -->
+                <form style="width: 500px;" (submit)="agregarDato()">
+        
+                    <div class="form-group">
+                        <label for="author" class=""
+                            style="font-size: 15px; font-family: 'Monospace', monospace;"><b>Autor:</b></label>
+                        <input type="text" [(ngModel)]="author" name="name" class="form-control" id="author"
+                            placeholder="Ingrese el autor"
+                            style="background-color: rgba(0, 0, 0, 0.212); border-color: black; background: white; font-family: 'Monospace', monospace;">
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mt-4">
+                        <div style="margin-left: 90px;">
+                            <button type="submit" class="btn btn-success"
+                            style="border-radius: 10px; padding-right: 20px; padding-left: 20px; padding-top: 10px; padding-bottom: 10px; font-family: 'Monospace', monospace; font-size: 20px; color: white;"><b>Confirmar</b>
+                        </button>
+                        </div>
+                        <div style="margin-right: 90px;">
+                            <button type="button" (click)="hideDialog()" class="btn btn-danger"
+                                style="border-radius: 10px; padding-right: 25px; padding-left: 25px; padding-top: 10px; padding-bottom: 10px; font-family: 'Monospace', monospace; font-size: 20px; color: white;"><b>Cancelar</b></button>
+                        </div>
+                    </div>
+                </form>
+
+            </p-dialog>
+
+        </div>
+        <!-- Formulario Editar -->
+        <div class="modal-overlay" *ngIf="exDialog"></div>
+
+        <p-dialog header="Editar autor" [(visible)]="exDialog" [modal]="true" [responsive]="true">
+            <!-- Contenido del diálogo -->
+            <form style="width: 500px;" *ngIf="modoEdicion" (submit)="guardarEdicion()">
+
+                <div class="form-group">
+                    <label for="title" class="" style="font-size: 15px;"><b>Autor:</b></label>
+                    <input type="text" [(ngModel)]="datoEditado.authorName" name="authorEditado" class="form-control" id="author"
+                        placeholder="Ingrese el autor" style="background-color: rgba(0, 0, 0, 0.212); border-color: black; background: white; font-family: 'Monospace', monospace;">
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-4">
+                    <div style="margin-left: 90px;">
+                        <button type="submit"  class="btn btn-success"
+                            style="border-radius: 10px; padding-right: 20px; padding-left: 20px; padding-top: 10px; padding-bottom: 10px; font-family: 'Monospace', monospace; font-size: 20px; color: white;"><b>Actualizar</b>
+                        </button>
+                    </div>
+                    <div style="margin-right: 90px;">
+                        <button type="button" (click)="exitDialog()" class="btn btn-danger"
+                            style="border-radius: 10px; padding-right: 25px; padding-left: 25px; padding-top: 10px; padding-bottom: 10px; font-family: 'Monospace', monospace; font-size: 20px; color: white;"><b>Cancelar</b></button>
+                    </div>
+                </div>
+            </form>
+
+
+        </p-dialog>
+
+    </div>
+        <div class="card">
+            <p-table [value]="listar.slice(first, first + rows)" [tableStyle]="{ 'min-width': '50rem' }">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Autor</th>
+                        <th class=" d-flex justify-content-center">Editar/Eliminar</th>
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-dato let-i="index">
+                    <tr>
+                        
+                        <!-- ... (otras columnas) -->
+                        <td class="d-flex justify-content-center"> 
+                            <i class="fas fa-pencil-alt fa-lg"
+                                style="color: blue; cursor: pointer; margin-right: 10px;" (click)="editarDato(i)"></i>
+                            <i class="fas fa-trash-alt fa-lg" style="color: red; cursor: pointer;"
+                                (click)="eliminar(dato)"></i>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-dato let-i="index">
+                    <tr>
+                        <td>{{ dato.authorName }}</td>
+                        <td class=" d-flex justify-content-center"> 
+                            <i class="fas fa-pencil-alt fa-lg"
+                                style="color: blue; cursor: pointer; margin-right: 10px;" (click)="editarDato(dato)"></i>
+                            <i class="fas fa-trash-alt fa-lg" style="color: red; cursor: pointer;"
+                                (click)="eliminar(dato)"></i>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+            <div class="card flex justify-content-center">
+                <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="listar.length" [rowsPerPageOptions]="[6]"></p-paginator>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <app-footer></app-footer>
+    </div>

@@ -1,0 +1,214 @@
+<div class="container-fluid">
+    <app-sidebar></app-sidebar>
+    <div class="row">
+        <div class="p-5 d-flex justify-content-between align-items-center">
+            <h1><b>Books</b></h1>
+            <a href="##" style="text-decoration: none; color: white;"><i class="fas fa-book fa-lg fa-9x"
+                    style="color: #563d7c; margin-right: 30px;"></i></a>
+        </div>
+        <div class="col-md-12">
+            <hr>
+        </div>
+        <div class="col-md-12">
+            <div class="d-flex justify-content-end" style="margin-top: 60px; margin-bottom: 20px; margin-right: 30px;">
+                <span class="p-input-icon-left" style="margin-right: 40px;">
+                    <i class="fas fa-search fa-lg"></i>
+                    <input type="text" pInputText [(ngModel)]="filtro" (input)="traer()" placeholder="Filtro"/>    
+                </span>
+                <p-button label="Agregar" (click)="showDialog()" [raised]="true" severity="Agregar"><i
+                        class="fas fa-plus fa-1x"
+                        style="color: white; margin-left: 10px; cursor: pointer; margin-right: 15px;"></i></p-button>
+            </div>
+            <div class="modal-overlay"></div>
+            <div class="modal-overlay" *ngIf="displayDialog"></div>
+
+          
+            <p-dialog header="Registrar libro" [(visible)]="displayDialog" [modal]="true" [responsive]="true">
+                <!-- Contenido del diálogo -->
+                <form style="width: 500px;" (submit)="agregarDato()">
+
+                    <div class="form-group">
+                        <label for="title" style="font-size: 15px;"><b>Título:</b></label>
+                        <input type="text" [(ngModel)]="title" name="title" class="form-control" id="title" placeholder="Ingrese el título">
+                    </div>
+                    <div class="form-group">
+                        <label for="releaseDate" 
+                            style="font-size: 15px; font-family: 'Monospace', monospace;"><b>Fecha
+                                de lanzamiento:</b></label>
+                        <input type="date" [(ngModel)]="publicationDate" name="Date" class="form-control" id="releaseDate"
+                            placeholder="Ingrese la fecha de lanzamiento"
+                            style="background-color: rgba(0, 0, 0, 0.212); border-color: black; background: white; font-family: 'Monospace', monospace;">
+                    </div>
+                    <!-- <div class="form-group">
+                        <label for="author" 
+                            style="font-size: 15px; font-family: 'Monospace', monospace;"><b>Autor:</b></label>
+                        <input type="text" [(ngModel)]="author" name="autor" class="form-control" id="author"
+                            placeholder="Ingrese el autor"
+                            style="background-color: rgba(0, 0, 0, 0.212); border-color: black; background: white; font-family: 'Monospace', monospace;">
+                    </div>
+                    <div class="form-group">
+                        <label for="category" 
+                            style="font-size: 15px; font-family: 'Monospace', monospace;"><b>Categoría:</b></label>
+                        <input type="text"  [(ngModel)]="category" name="category" class="form-control" id="category" placeholder="Ingrese la categoría"
+                            style="background-color: rgba(0, 0, 0, 0.212); border-color: black; background: white; font-family: 'Monospace', monospace;">
+                    </div>
+                    <div class="form-group">
+                        <label for="publisher"
+                            style="font-size: 15px; font-family: 'Monospace', monospace;"><b>Editorial:</b></label>
+                        <input type="text" [(ngModel)]="publisher" name="editorial" class="form-control" id="publisher" placeholder="Ingrese la editorial"
+                            style="background-color: rgba(0, 0, 0, 0.212); border-color: black; background: white; font-family: 'Monospace', monospace;">
+                    </div> -->
+                    <div class="form-group">
+                        <label for="language"
+                            style="font-size: 15px; font-family: 'Monospace', monospace;"><b>Idioma:</b></label>
+                        <input type="text" [(ngModel)]="language" name="lenguage" class="form-control" id="language" placeholder="Ingrese el idioma"
+                            style="background-color: rgba(0, 0, 0, 0.212); border-color: black; background: white; font-family: 'Monospace', monospace;">
+                    </div>
+                    <div class="form-group">
+                        <label for="pages"
+                            style="font-size: 15px; font-family: 'Monospace', monospace;"><b>Páginas:</b></label>
+                        <input type="number" [(ngModel)]="pages" name="pages" class="form-control" id="pages" placeholder="Ingrese el número de páginas"
+                            style="background-color: rgba(0, 0, 0, 0.212); border-color: black; background: white; font-family: 'Monospace', monospace;">
+                    </div>
+                    <div class="form-group">
+                        <label for="pages"
+                            style="font-size: 15px; font-family: 'Monospace', monospace;"><b>Descripcion:</b></label>
+                        <input type="text" [(ngModel)]="description" name="description" class="form-control" id="pages" placeholder="Ingrese la descripcion"
+                            style="background-color: rgba(0, 0, 0, 0.212); border-color: black; background: white; font-family: 'Monospace', monospace;">
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mt-4">
+                        <div style="margin-left: 90px;">
+                            <button type="submit" class="btn btn-success"
+                            style="border-radius: 10px; padding-right: 20px; padding-left: 20px; padding-top: 10px; padding-bottom: 10px; font-family: 'Monospace', monospace; font-size: 20px; color: white;"><b>Confirmar</b>
+                        </button>
+                        </div>
+                        <div style="margin-right: 90px;">
+                            <button type="button" (click)="hideDialog()" class="btn btn-danger"
+                                style="border-radius: 10px; padding-right: 25px; padding-left: 25px; padding-top: 10px; padding-bottom: 10px; font-family: 'Monospace', monospace; font-size: 20px; color: white;"><b>Cancelar</b></button>
+                        </div>
+                    </div>
+                </form>
+
+
+            </p-dialog>
+
+        </div>
+        <!-- Formulario Editar -->
+        <div class="modal-overlay" *ngIf="exDialog"></div>
+
+        <p-dialog header="Editar libro" [(visible)]="exDialog" [modal]="true" [responsive]="true">
+            <!-- Contenido del diálogo -->
+            <form style="width: 500px;" *ngIf="modoEdicion" (submit)="guardarEdicion()">
+
+                <div class="form-group">
+                    <label for="title" class="" style="font-size: 15px;"><b>Título:</b></label>
+                    <input type="text" [(ngModel)]="datoEditado.title" name="tituloEditado" class="form-control" id="title"
+                        placeholder="Ingrese el título" style="background-color: rgba(0, 0, 0, 0.212); border-color: black; background: white; font-family: 'Monospace', monospace;">
+                </div>
+                <div class="form-group">
+                    <label for="releaseDate" class="" style="font-size: 15px; font-family: 'Monospace', monospace;"><b>Fecha de lanzamiento:</b></label>
+                    <input type="date" [(ngModel)]="datoEditado.publicationDate"  name="fechaLanzamientoEditado" class="form-control" id="releaseDate"
+                        placeholder="Ingrese la fecha de lanzamiento" style="background-color: rgba(0, 0, 0, 0.212); border-color: black; background: white; font-family: 'Monospace', monospace;">
+                </div>
+                <!-- Agregar las demás propiedades correspondientes -->
+                <div class="form-group">
+                    <label for="author" class="" style="font-size: 15px; font-family: 'Monospace', monospace;"><b>Autor:</b></label>
+                    <input type="text" [(ngModel)]="datoEditado.author"  name="autorEditado" class="form-control" id="author"
+                        placeholder="Ingrese el autor" style="background-color: rgba(0, 0, 0, 0.212); border-color: black; background: white; font-family: 'Monospace', monospace;">
+                </div>
+                <div class="form-group">
+                    <label for="category" class=""
+                        style="font-size: 15px; font-family: 'Monospace', monospace;"><b>Categoría:</b></label>
+                    <input type="text" [(ngModel)]="datoEditado.category" name="categoryEditado" class="form-control" id="category" placeholder="Ingrese la categoría"
+                        style="background-color: rgba(0, 0, 0, 0.212); border-color: black; background: white; font-family: 'Monospace', monospace;">
+                </div>
+                <div class="form-group">
+                    <label for="publisher" class=""
+                        style="font-size: 15px; font-family: 'Monospace', monospace;"><b>Editorial:</b></label>
+                    <input type="text" [(ngModel)]="datoEditado.publisher" name="editorialEditado" class="form-control" id="publisher" placeholder="Ingrese la editorial"
+                        style="background-color: rgba(0, 0, 0, 0.212); border-color: black; background: white; font-family: 'Monospace', monospace;">
+                </div>
+                <div class="form-group">
+                    <label for="language" class=""
+                        style="font-size: 15px; font-family: 'Monospace', monospace;"><b>Idioma:</b></label>
+                    <input type="text" [(ngModel)]="datoEditado.language" name="languageEditado" class="form-control" id="language" placeholder="Ingrese el idioma"
+                        style="background-color: rgba(0, 0, 0, 0.212); border-color: black; background: white; font-family: 'Monospace', monospace;">
+                </div>
+                <div class="form-group">
+                    <label for="pages" class=""
+                        style="font-size: 15px; font-family: 'Monospace', monospace;"><b>Páginas:</b></label>
+                    <input type="number" [(ngModel)]="datoEditado.pages" name="pagesEditado" class="form-control" id="pages" placeholder="Ingrese el número de páginas"
+                        style="background-color: rgba(0, 0, 0, 0.212); border-color: black; background: white; font-family: 'Monospace', monospace;">
+                </div>
+                <div class="form-group">
+                    <label for="pages" class=""
+                        style="font-size: 15px; font-family: 'Monospace', monospace;"><b>Descripcion:</b></label>
+                    <input type="text" [(ngModel)]="datoEditado.description" name="descriptionEditado" class="form-control" id="pages" placeholder="Ingrese la descripcion"
+                        style="background-color: rgba(0, 0, 0, 0.212); border-color: black; background: white; font-family: 'Monospace', monospace;">
+                </div>
+ 
+                <div class="d-flex justify-content-between align-items-center mt-4">
+                    <div style="margin-left: 90px;">
+                        <button type="submit"  class="btn btn-success"
+                            style="border-radius: 10px; padding-right: 20px; padding-left: 20px; padding-top: 10px; padding-bottom: 10px; font-family: 'Monospace', monospace; font-size: 20px; color: white;"><b>Actualizar</b>
+                        </button>
+                    </div>
+                    <div style="margin-right: 90px;">
+                        <button type="button" (click)="exitDialog()" class="btn btn-danger"
+                            style="border-radius: 10px; padding-right: 25px; padding-left: 25px; padding-top: 10px; padding-bottom: 10px; font-family: 'Monospace', monospace; font-size: 20px; color: white;"><b>Cancelar</b></button>
+                    </div>
+                </div>
+            </form>
+
+
+        </p-dialog>
+
+    </div>
+
+    <div class="card">
+        <p-table [value]="listar.slice(first, first + rows)" [tableStyle]="{ 'min-width': '50rem' }">
+            <ng-template pTemplate="header">
+              <tr>
+                <th>Titulo</th>
+                <th>Fecha de lanzamiento</th>
+    
+                <th>Idioma</th>
+                <th>Paginas</th>
+                <th>Descripción</th>
+                <th class="d-flex justify-content-center">Editar/Eliminar</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-dato let-i="index">
+              <tr>
+                <td>{{ dato.title }}</td>
+                <td>{{ dato.publicationDate }}</td>
+                
+                <td>{{ dato.language }}</td>
+                <td>{{ dato.pages }}</td>
+                <td>{{ dato.description }}</td>
+                <td class="d-flex justify-content-center">
+                  <i class="fas fa-pencil-alt fa-lg" style="color: blue; cursor: pointer; margin-right: 10px;"
+                    (click)="editarDato(i)"></i>
+                  <i class="fas fa-trash-alt fa-lg" style="color: red; cursor: pointer;" (click)="eliminar(dato)"></i>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        <div class="card flex justify-content-center">
+            <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="listar.length"
+                [rowsPerPageOptions]="[6]"></p-paginator>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+</div>
+
+<div class="footer">
+    <app-footer></app-footer>
+</div>

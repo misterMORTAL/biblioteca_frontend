@@ -1,0 +1,22 @@
+<div class="container-fluid"></div>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6" style="margin-top: 10%;">
+      <div *ngIf="!resetSuccess" class="card p-4" style="border-radius: 20px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <h2 style="font-size: 24px;">Restablecer Contraseña</h2><br>
+        <div *ngIf="!resetError">
+          <p style="font-size: 16px;">Por favor, introduce tu nueva contraseña:</p>
+          <input type="password" [(ngModel)]="newPassword" placeholder="Nueva Contraseña" class="form-control mb-2" style="background-color: #f9f9f9; border-color: #3498db; color: #333;">
+          <button class="btn btn-primary" (click)="onResetPassword()" style="background-color: #3498db; border-color: #2980b9; font-size: 16px; width: 100%;">Restablecer Contraseña</button>
+        </div>
+        <div *ngIf="resetError" class="text-danger mt-3" style="font-size: 16px;">
+          Ha ocurrido un error al restablecer la contraseña. Por favor, inténtalo de nuevo.
+        </div>
+      </div>
+      <div *ngIf="resetSuccess" class="text-success mt-3" style="font-size: 16px;">
+        Contraseña restablecida con éxito. Redirigiendo a la página de inicio de sesión...
+      </div>
+    </div>
+  </div>
+</div>
